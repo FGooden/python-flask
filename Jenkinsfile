@@ -1,22 +1,16 @@
-pipeline {
-    agent any
+pipeline {  
+    environment {
+        registry = "ridacap/flask-image"
+        registryCredential = '5ba09b2b-7ad1-4566-a725-afa2898d165b'
+  }  
+    agent any  
     stages {
-        stage("build") {
-            steps {
-                echo 'building the application...'           
-            }
-        }  
-        stage("test") {
-            steps {
-                echo 'testing the application...'
-            }    
-        }               
-        stage("deploy") {
-            steps {
-                echo 'deploying the application...'
-            }
+        stage('Building image') {
+            steps{
+                script {
+                     docker.build registry + ":$BUILD_NUMBER"
         }
+      }
     }
+  }
 }
-    
-
