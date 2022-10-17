@@ -21,8 +21,8 @@ pipeline {
         stage('Deploy Image') {
             steps{
                 script {
-                     docker.withRegistry( '', registryCredential ) {
-                        dockerImage.push()  
+                     docker.ridacap( '', registryCredential ) {
+                        flask-image.push()  
                      }
                 }
             }
