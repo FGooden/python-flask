@@ -1,21 +1,15 @@
-pipeline {
-	    agent any
-	    stages {
-	        stage("build") {
-	            steps {
-	                echo 'building the application...'           
-	            }
-	        }  
-	        stage("test") {
-	            steps {
-	                echo 'testing the application...'
-	            }    
-	        }               
-	        stage("deploy") {
-	            steps {
-	                echo 'deploying the application...'
-	            }
-	        }
-	    }
-	}
+node {   
+    stage('Clone repository') {
+        git credentialsId: 'git', url: 'https://github.com/FGooden/python-flask.git'
+    }
+    
+    stage('Build image') {
+       dockerImage = docker.build("ridacap/flask-image:latest")
+    }
+    
+ stage('Push image') {
+        withDockerRegistry([ credentialsId: "dockerhub-cred", url: "" ]) {
+        dockerImage.push()
+        }
+    }    
 }
