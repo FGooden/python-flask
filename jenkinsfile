@@ -1,20 +1,46 @@
-pipeline {
-	    agent any
-	    stages {
-	        stage("build") {
-	            steps {
-	                echo 'building the application...'           
-	            }
-	        }  
-	        stage("test") {
-	            steps {
-	                echo 'testing the application...'
-	            }    
-	        }               
-	        stage("deploy") {
-	            steps {
-	                echo 'deploying the application...'
-	            }
-	        }
-	    }
-	}
+pipeline{
+    
+    agent any
+    options {
+        skipStagesAfterUnstable()
+    }
+environment {
+    DOCKERHUB_CREDENTIALS=credentials('dockerhub-cred')
+}
+
+stages {
+
+    stage('gitclone') {
+
+        steps {
+            git 'https://github.com/FGooden/python-flask.git'
+        }
+    }
+
+    stage('Build') {
+
+        steps {
+            sh 'docker build -t ridacap/flask-image:latest .'
+        }
+    }
+
+    stage('Login') {
+
+        steps {
+            sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+        }
+    }
+
+    stage('Push') {
+
+        steps {
+            sh 'docker push ridacap/flask-image:latest'
+        }
+    }
+}
+
+post {
+    always {
+        sh 'docker logout'
+    }
+}
