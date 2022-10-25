@@ -4,12 +4,7 @@ node {
     }
     
     stage('Build image') {
-       dockerImage = docker.build("ridacap/flask-image:latest")
+        def customImage = docker.build("ridacap/flask-image:${env.BUILD_ID}")
+        customImage.push()
     }
-    
- stage('Push image') {
-        withDockerRegistry([ credentialsId: 'dockerhub-cred', url: 'unix:///var/run/docker.sock' ]) {
-        dockerImage.push()
-        }
-    }    
 }
