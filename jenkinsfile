@@ -1,10 +1,15 @@
 node {   
     stage('Clone repository') {
-        git branch: 'main', credentialsId: 'github-cred', url: 'https://github.com/FGooden/python-flask.git'
+        git branch: 'main', credentialsId: 'GitHub-ssh', url: 'git@github.com:FGooden/python-flask.git'
     }
     
     stage('Build image') {
-        def customImage = docker.build("ridacap/flask-image:${env.BUILD_ID}")
-        customImage.push()
+        sh 'docker build -t ridacap/flask-image:latest .'
     }
+    
+    stage('Push image') {
+        withDockerRegistry([ credentialsId: 'docker-cred', url: 'unix:///var/run/docker.sock' ]) {
+        dockerImage.push()
+        }  
+    }    
 }
