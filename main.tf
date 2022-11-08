@@ -1,42 +1,23 @@
-pipeline {
-
-    agent any
-
-    stages {
-
-        stage(‘Checkout’) {
-
-            steps {
-
-                checkout([$class: ‘GitSCM’, branches: [[name: ‘*/main’]], extensions: [], userRemoteConfigs: [[url: ‘https://github.com/FGooden/python-flask.git‘]]])
-
-            }
-
-        }
-
-        stage(“terraform init”) {
-
-            steps {
-
-                sh (‘terraform init’)
-
-            }
-
-        }
-
-        stage(“terraform Action”) {
-
-            steps {
-
-                echo “Terraform action is –> ${action}”
-
-                sh (‘terraform ${action} –auto-approve’)
-
-            }
-
-        }
-
+terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 4.37.0"
     }
+  }
 
+  #required_version = ">= 1.0.0"
 }
 
+provider "aws" {
+  region = "eu-west-2"
+}
+
+resource "aws_instance" "app_server" {
+  ami           = "ami-0648ea225c13e0729"
+  instance_type = "t2.micro"
+
+  tags = {
+    Name = "ExampleAppServerInstance"
+  }
+}
