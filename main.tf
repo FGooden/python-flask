@@ -21,20 +21,3 @@ resource "aws_instance" "app_server" {
     Name = "Jenkinstf"
   }
 }
-resource "aws_iam_role" "terraform-jenkins" {
-  name = "terraform-jenkinse"
-
-  assume_role_policy = jsonencode({
-    Version = "2012-10-17"
-    Statement = [
-      {
-        Action = "sts:AssumeRole"
-        Effect = "Allow"
-        Sid    = ""
-        Principal = {
-          Service = "ec2.amazonaws.com"
-        }
-      },
-    ]
-  })
-}
