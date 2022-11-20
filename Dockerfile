@@ -1,6 +1,6 @@
 FROM python:3.8-slim-buster
-RUN pip install --upgrade pip
-WORKDIR /usr/src/app
+RUN /usr/local/bin/python -m pip install --upgrade pip
+WORKDIR 
 COPY . .
-RUN pip install .
+RUN pip install 
 CMD [""python3", "-m" , "flask", "run", "--host=0.0.0.0" "--port=5000""]
