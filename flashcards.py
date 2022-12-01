@@ -5,4 +5,4 @@ app = Flask(__name__)
 
 @app.route("/")
 def welcome():
-    return "Welcome to my Flash Cards application"
+    return "Welcome to my Flash Cards with Docker."
