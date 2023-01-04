@@ -3,4 +3,5 @@ RUN /usr/local/bin/python -m pip install --upgrade pip
 WORKDIR /usr/src/app
 COPY . .
 
-CMD flask run -h 0.0.0.0 -p 5000
+EXPOSE 5000
+CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0" "--port=5000"]
