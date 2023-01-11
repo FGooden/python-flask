@@ -25,5 +25,5 @@ jobs:
       
     - 
       name: Docker Push
-      run: docker push ${{secrets.DOCKER_USER}}/RIDACAP/FLASK-IMAGE
-        
+      run: docker push ${{secrets.DOCKER_USER}}/ridacap/flask-image:latest
+
