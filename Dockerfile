@@ -4,4 +4,4 @@ WORKDIR /usr/src/app
 RUN /usr/local/bin/python -m pip install --upgrade pip
 COPY . /flashcards.py /
 ENTRYPOINT [ "python3" ]
-CMD [ "flashcards.py"]
+CMD ["flashcards.py"]
