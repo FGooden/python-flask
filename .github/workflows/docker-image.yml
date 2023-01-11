@@ -22,8 +22,7 @@ jobs:
     -
       name: Build the Docker image
       run: docker build . --file Dockerfile --tag ridacap/flask-image:$(date +%s)
-      
     - 
       name: Docker Push
-      run: docker push ridacap/flask-image
+      run: ${{ secrets.DOCKER_USER }}/flask-image
 
