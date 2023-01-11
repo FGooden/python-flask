@@ -15,7 +15,7 @@ provider "aws" {
 }
 
 resource "aws_instance" "dockeros" {
-  ami           = "ami-09c3ef3201cf7dbdb" #EKS Kubernetes Worker AMI with AmazonLinux2 image
+  ami           = "ami-00bc724dc9ba1f5e8" #buildkite-stack-linux-arm64-2022-07-20T01-43-10Z-eu-west-2
   instance_type = "t2.micro"
   
   #keypair
