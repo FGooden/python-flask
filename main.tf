@@ -15,7 +15,7 @@ provider "aws" {
 }
 
 resource "aws_instance" "dockeros" {
-  ami           = "ami-0648ea225c13e0729" #Amazon Linux 2 AMI
+  ami           = "ami-07bce8cc7445f0677" #Amazon ECS-Optimized Amazon Linux 2 (AL2) x86_64 AMI
   instance_type = "t2.micro"
   
   #keypair
