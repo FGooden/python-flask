@@ -3,17 +3,18 @@ name: Docker Image CI
 on:
   push:
     branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
 
 jobs:
-  docker:
+  first-job: 
     runs-on: ubuntu-latest
     steps:
     
-    - name: Checkout 
+    - name: Checkout
       uses: actions/checkout@v3
       
+    - name: Test
+      uses: ./.github/actions/automatic-tests
+    
     - name: Set up QEMU
       uses: docker/setup-qemu-action@v2
       
