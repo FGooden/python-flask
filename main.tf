@@ -15,7 +15,7 @@ provider "aws" {
 }
 
 resource "aws_instance" "dockeros" {
-  ami           = "ami-0cfe0d648c03afff1" #Amazon Linux 2 AMI (HVM) - Kernel 5.10, SSD Volume Type
+  ami           = "ami-0185e5307a8f09477" #amazon-eks-arm64-node-1.23-v20220926
   instance_type = "t2.micro"
   
   #keypair
