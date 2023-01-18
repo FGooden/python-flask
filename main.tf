@@ -22,7 +22,7 @@ resource "aws_instance" "dockeros" {
     connection {
     type        = "ssh"
     user        = "ec2-user"
-    private_key = file("Desktop/dockerkey.pem")
+    private_key = file("./dockerkey.pem")
     host        = aws_instance.dockeros.public_ip
     }
   
