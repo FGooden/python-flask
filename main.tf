@@ -28,11 +28,8 @@ resource "aws_instance" "dockeros" {
   
   provisioner "remote-exec" {
   inline = [
-    "sudo yum update -y",
-    "sudo yum install -y docker",
-    "sudo service docker start",
-    "docker pull ridacap/flask-image:87
-  ]
+    "sudo yum update -y, sudo yum install -y docker, sudo service docker start, docker pull ridacap/flask-image:88
+    ]
   }
 }
   
